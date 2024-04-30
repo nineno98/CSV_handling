@@ -15,14 +15,47 @@ namespace CSV_console_app
             
             beolvas();
             
-
+            /*
             foreach (Dolgozo item in dolgozok)
             {
                 Console.WriteLine(item);
-            }
+            }*/
+
+            feladat01();
+            feladat02();
+            feladat03();
+            feladat04();
 
             Console.WriteLine("Program vége");
             Console.ReadKey();
+        }
+
+        private static void feladat04()
+        {
+            Console.WriteLine("4. feladat:");
+            foreach (var item in dolgozok.FindAll(a => a.Reszle == "asztalosműhely"))
+            {
+                Console.WriteLine($"\t{item.Nev}");
+            }
+        }
+
+        private static void feladat03()
+        {
+            Console.WriteLine("3. feladat:");
+            foreach (var item in dolgozok.GroupBy(a => a.Reszle).Select(b => new { reszleg = b.Key, letszam = b.Count() }))
+            {
+                Console.WriteLine($"\t{item.reszleg}: {item.letszam}");
+            }
+        }
+
+        private static void feladat02()
+        {
+            Console.WriteLine("2. feladat: legmagasabb bérű dolgozó: "+ dolgozok.Find( a => a.Ber == dolgozok.Max(b => b.Ber)));
+        }
+
+        private static void feladat01()
+        {
+            Console.WriteLine("\t1. feladat: dolgozók száma: "+dolgozok.Count());
         }
 
         private static void beolvas()
